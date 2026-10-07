@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Campus Lost & Found</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Campus Lost & Found</h1>
+        <p>Helping students find what they have lost.</p>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <h2>Lost something? Found something?</h2>
+            <p>Report it and help your campus community.</p>
+
+            <button id="lostBtn">Report Lost Item</button>
+            <button id="foundBtn">Report Found Item</button>
+        </section>
+
+        <section id="reportSection">
+
+            <h2>Report an Item</h2>
+
+            <form id="itemForm">
+
+                <label for="itemName">Item Name</label>
+                <input type="text" id="itemName" required>
+
+                <label for="category">Category</label>
+                <select id="category" required>
+                    <option value="">Select Category</option>
+                    <option value="ID Card">ID Card</option>
+                    <option value="Phone">Phone</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Wallet">Wallet</option>
+                    <option value="Keys">Keys</option>
+                    <option value="Bag">Bag</option>
+                    <option value="Books">Books</option>
+                    <option value="Documents">Documents</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="description">Description</label>
+                <textarea id="description" rows="4" required></textarea>
+
+                <label for="location">Location</label>
+                <input type="text" id="location" required>
+
+                <label for="date">Date</label>
+                <input type="date" id="date" required>
+
+                <label for="contact">Contact Information</label>
+                <input type="text" id="contact" required>
+
+                <button type="submit">Submit Report</button>
+
+            </form>
+
+        </section>
+
+        <section>
+
+            <h2>Reported Items</h2>
+
+            <div id="itemsContainer">
+                <p>No items reported yet.</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
