@@ -11,74 +11,251 @@
 
 <body>
 
+    <!-- HEADER -->
     <header>
-        <h1>Campus Lost & Found</h1>
-        <p>Helping students find what they have lost.</p>
+        <div class="header-content">
+
+            <p class="tagline">CAMPUS COMMUNITY</p>
+
+            <h1>Campus Lost & Found</h1>
+
+            <p>
+                Helping students find what matters, faster.
+            </p>
+
+        </div>
     </header>
+
 
     <main>
 
+        <!-- HERO SECTION -->
         <section class="hero">
-            <h2>Lost something? Found something?</h2>
-            <p>Report it and help your campus community.</p>
 
-            <button id="lostBtn">Report Lost Item</button>
-            <button id="foundBtn">Report Found Item</button>
+            <div class="hero-icon">✦</div>
+
+            <p class="small-title">LOST SOMETHING?</p>
+
+            <h2>Let's help you find it.</h2>
+
+            <p class="hero-text">
+                Report lost or found items around campus and help
+                reconnect them with their owners.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button id="lostBtn">
+                    ♡ Report Lost Item
+                </button>
+
+                <button id="foundBtn" class="secondary-btn">
+                    ✦ Report Found Item
+                </button>
+
+            </div>
+
         </section>
 
+
+        <!-- REPORT FORM -->
         <section id="reportSection">
 
-            <h2>Report an Item</h2>
+            <div class="section-heading">
+
+                <p class="small-title">REPORT AN ITEM</p>
+
+                <h2>Add a Lost or Found Item</h2>
+
+                <p>
+                    Fill in the details below to create a report.
+                </p>
+
+            </div>
+
 
             <form id="itemForm">
 
-                <label for="itemName">Item Name</label>
-                <input type="text" id="itemName" required>
+                <label for="itemName">
+                    Item Name
+                </label>
 
-                <label for="category">Category</label>
+                <input
+                    type="text"
+                    id="itemName"
+                    placeholder="Example: Black Backpack"
+                    required
+                >
+
+
+                <label for="category">
+                    Category
+                </label>
+
                 <select id="category" required>
-                    <option value="">Select Category</option>
-                    <option value="ID Card">ID Card</option>
-                    <option value="Phone">Phone</option>
-                    <option value="Laptop">Laptop</option>
-                    <option value="Wallet">Wallet</option>
-                    <option value="Keys">Keys</option>
-                    <option value="Bag">Bag</option>
-                    <option value="Books">Books</option>
-                    <option value="Documents">Documents</option>
-                    <option value="Accessories">Accessories</option>
-                    <option value="Other">Other</option>
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    <option value="ID Card">
+                        ID Card
+                    </option>
+
+                    <option value="Phone">
+                        Phone
+                    </option>
+
+                    <option value="Laptop">
+                        Laptop
+                    </option>
+
+                    <option value="Wallet">
+                        Wallet
+                    </option>
+
+                    <option value="Keys">
+                        Keys
+                    </option>
+
+                    <option value="Bag">
+                        Bag
+                    </option>
+
+                    <option value="Books">
+                        Books
+                    </option>
+
+                    <option value="Documents">
+                        Documents
+                    </option>
+
+                    <option value="Accessories">
+                        Accessories
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
                 </select>
 
-                <label for="description">Description</label>
-                <textarea id="description" rows="4" required></textarea>
 
-                <label for="location">Location</label>
-                <input type="text" id="location" required>
+                <label for="status">
+                    Status
+                </label>
 
-                <label for="date">Date</label>
-                <input type="date" id="date" required>
+                <select id="status" required>
 
-                <label for="contact">Contact Information</label>
-                <input type="text" id="contact" required>
+                    <option value="">
+                        Select Status
+                    </option>
 
-                <button type="submit">Submit Report</button>
+                    <option value="Lost">
+                        Lost
+                    </option>
+
+                    <option value="Found">
+                        Found
+                    </option>
+
+                </select>
+
+
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    rows="4"
+                    placeholder="Describe the item..."
+                    required
+                ></textarea>
+
+
+                <label for="location">
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="Example: Library"
+                    required
+                >
+
+
+                <label for="date">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="date"
+                    required
+                >
+
+
+                <label for="contact">
+                    Contact
+                </label>
+
+                <input
+                    type="text"
+                    id="contact"
+                    placeholder="Email or phone number"
+                    required
+                >
+
+
+                <button type="submit" class="submit-btn">
+                    Submit Report
+                </button>
 
             </form>
 
         </section>
 
-        <section>
 
-            <h2>Reported Items</h2>
+        <!-- REPORTED ITEMS -->
+        <section class="reported-section">
 
-            <div id="itemsContainer">
-                <p>No items reported yet.</p>
+            <div class="section-heading">
+
+                <p class="small-title">
+                    CAMPUS DATABASE
+                </p>
+
+                <h2>Reported Items</h2>
+
+                <p>
+                    Browse recently reported lost and found items.
+                </p>
+
             </div>
+
+
+            <div id="itemsContainer"></div>
 
         </section>
 
     </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 Campus Lost & Found
+        </p>
+
+        <p>
+            Built for the campus community
+        </p>
+
+    </footer>
+
 
     <script src="script.js"></script>
 
