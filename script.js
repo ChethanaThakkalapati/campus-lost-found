@@ -39,7 +39,7 @@ foundBtn.addEventListener("click", function () {
 let items = [
 
     {
-        name: "Black Backpack",
+        name: "Backpack",
         category: "Bag",
         status: "Lost",
         description:
@@ -61,7 +61,7 @@ let items = [
     },
 
     {
-        name: "Samsung Phone",
+        name: "Phone",
         category: "Phone",
         status: "Lost",
         description:
@@ -83,7 +83,7 @@ let items = [
     },
 
     {
-        name: "Engineering Book",
+        name: "Books",
         category: "Books",
         status: "Lost",
         description:
@@ -94,7 +94,7 @@ let items = [
     },
 
     {
-        name: "Brown Wallet",
+        name: "Wallet",
         category: "Wallet",
         status: "Found",
         description:
