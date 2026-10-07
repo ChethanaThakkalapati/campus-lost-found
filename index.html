@@ -236,7 +236,38 @@
             </div>
 
 
-            <div id="itemsContainer"></div>
+            <div class="filters">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search items..."
+    >
+
+    <select id="statusFilter">
+        <option value="All">All Status</option>
+        <option value="Lost">Lost</option>
+        <option value="Found">Found</option>
+        <option value="Returned">Returned</option>
+    </select>
+
+    <select id="categoryFilter">
+        <option value="All">All Categories</option>
+        <option value="ID Card">ID Card</option>
+        <option value="Phone">Phone</option>
+        <option value="Laptop">Laptop</option>
+        <option value="Wallet">Wallet</option>
+        <option value="Keys">Keys</option>
+        <option value="Bag">Bag</option>
+        <option value="Books">Books</option>
+        <option value="Documents">Documents</option>
+        <option value="Accessories">Accessories</option>
+        <option value="Other">Other</option>
+    </select>
+
+</div>
+
+<div id="itemsContainer"></div>
 
         </section>
 
@@ -257,7 +288,43 @@
     </footer>
 
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 
 </body>
 </html>
+/* RETURNED BUTTON */
+
+.returned-btn {
+    width: 100%;
+    margin: 18px 0 0;
+    padding: 12px 18px;
+
+    background: #4e8985;
+    color: white;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    box-shadow: none;
+}
+
+.returned-btn:hover {
+    background: #356c69;
+    transform: translateY(-2px);
+}
+
+.returned-label {
+    margin-top: 18px;
+    padding: 10px;
+
+    text-align: center;
+
+    background: #d7eee7;
+    color: #3d7567;
+
+    border-radius: 12px;
+
+    font-weight: 700;
+}

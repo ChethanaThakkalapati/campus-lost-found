@@ -537,3 +537,24 @@ footer p {
     }
 
 }
+/* SEARCH AND FILTERS */
+
+.filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.filters input,
+.filters select {
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+
+    .filters {
+        grid-template-columns: 1fr;
+    }
+
+}

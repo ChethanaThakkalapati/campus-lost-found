@@ -1,10 +1,37 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    updateDoc,
+    doc
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDi7aFmZLGaTQeZoky35NsZ2gNO-eHI9_E",
+    authDomain: "campus-lost-found-12646.firebaseapp.com",
+    projectId: "campus-lost-found-12646",
+    storageBucket: "campus-lost-found-12646.firebasestorage.app",
+    messagingSenderId: "778080160008",
+    appId: "1:778080160008:web:a38333d2e3630e1d9384bd",
+    measurementId: "G-GLPM3ZYYRP"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
 const lostBtn = document.getElementById("lostBtn");
 const foundBtn = document.getElementById("foundBtn");
 
 const reportSection = document.getElementById("reportSection");
 
 const itemForm = document.getElementById("itemForm");
-
+const searchInput = document.getElementById("searchInput");
+const statusFilter = document.getElementById("statusFilter");
+const categoryFilter = document.getElementById("categoryFilter");
 const itemsContainer = document.getElementById("itemsContainer");
 
 
@@ -133,7 +160,7 @@ function getIcon(category) {
 
 /* DISPLAY ITEMS */
 
-function displayItems() {
+function displayItems(itemsToDisplay = items) {
 
     itemsContainer.innerHTML = "";
 
@@ -177,22 +204,34 @@ function displayItems() {
 
             <div class="item-details">
 
-                <p>
-                    📍 <strong>Location:</strong>
-                    ${item.location}
-                </p>
+    <p>
+        📍 <strong>Location:</strong>
+        ${item.location}
+    </p>
 
-                <p>
-                    📅 <strong>Date:</strong>
-                    ${item.date}
-                </p>
+    <p>
+        📅 <strong>Date:</strong>
+        ${item.date}
+    </p>
 
-                <p>
-                    ✉ <strong>Contact:</strong>
-                    ${item.contact}
-                </p>
+    <p>
+        ✉ <strong>Contact:</strong>
+        ${item.contact}
+    </p>
 
-            </div>
+</div>
+
+${item.status !== "Returned" ? `
+    <button
+        class="returned-btn"
+        data-id="${item.id}">
+        ✓ Mark as Returned
+    </button>
+` : `
+    <p class="returned-label">
+        ✓ Item Returned
+    </p>
+`}
 
         `;
 
@@ -206,7 +245,7 @@ function displayItems() {
 
 /* FORM SUBMISSION */
 
-itemForm.addEventListener("submit", function (event) {
+itemForm.addEventListener("submit", async function (event) {
 
     event.preventDefault();
 
@@ -237,17 +276,17 @@ itemForm.addEventListener("submit", function (event) {
     };
 
 
-    items.unshift(newItem);
+    try {
 
+    await addDoc(collection(db, "items"), newItem);
+
+    items.unshift(newItem);
 
     displayItems();
 
-
     alert("Item report submitted successfully!");
 
-
     itemForm.reset();
-
 
     document
         .querySelector(".reported-section")
@@ -255,9 +294,109 @@ itemForm.addEventListener("submit", function (event) {
             behavior: "smooth"
         });
 
+} catch (error) {
+
+    console.error("Error saving item:", error);
+
+    alert("Could not submit the report. Please try again.");
+
+}
+
 });
 
 
 /* INITIAL DISPLAY */
 
-displayItems();
+async function loadItems() {
+
+    const snapshot = await getDocs(collection(db, "items"));
+
+    items = [];
+
+    snapshot.forEach(function (doc) {
+
+        items.push({
+            id: doc.id,
+            ...doc.data()
+        });
+
+    });
+
+    displayItems();
+
+}
+
+loadItems();
+
+/* SEARCH AND FILTER */
+
+function filterItems() {
+
+    const searchText = searchInput.value.toLowerCase();
+
+    const selectedStatus = statusFilter.value;
+
+    const selectedCategory = categoryFilter.value;
+
+
+    const filteredItems = items.filter(function (item) {
+
+        const matchesSearch =
+            item.name.toLowerCase().includes(searchText) ||
+            item.description.toLowerCase().includes(searchText) ||
+            item.location.toLowerCase().includes(searchText);
+
+
+        const matchesStatus =
+            selectedStatus === "All" ||
+            item.status === selectedStatus;
+
+
+        const matchesCategory =
+            selectedCategory === "All" ||
+            item.category === selectedCategory;
+
+
+        return (
+            matchesSearch &&
+            matchesStatus &&
+            matchesCategory
+        );
+
+    });
+
+
+    displayItems(filteredItems);
+
+}
+
+
+/* FILTER EVENTS */
+
+searchInput.addEventListener("input", filterItems);
+
+statusFilter.addEventListener("change", filterItems);
+
+categoryFilter.addEventListener("change", filterItems);
+
+/* MARK AS RETURNED */
+
+itemsContainer.addEventListener("click", async function (event) {
+
+    if (!event.target.classList.contains("returned-btn")) {
+        return;
+    }
+
+    const itemId = event.target.dataset.id;
+
+    await updateDoc(
+        doc(db, "items", itemId),
+        {
+            status: "Returned"
+        }
+    );
+
+    await loadItems();
+
+    alert("Item marked as returned!");
+});
